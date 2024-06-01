@@ -75,6 +75,14 @@ defmodule Ueberauth.Strategy.Apple do
   @impl Ueberauth.Strategy
   @spec handle_callback!(Plug.Conn.t()) :: Plug.Conn.t()
   def handle_callback!(%Plug.Conn{params: %{"code" => code, "id_token" => token} = params} = conn) do
+    IO.puts("handle_callback!")
+    IO.puts("handle_callback!")
+    IO.puts("handle_callback!")
+    IO.puts("handle_callback!")
+    IO.puts("handle_callback!")
+    IO.inspect(code)
+    IO.inspect(token)
+
     opts = oauth_client_options_from_conn(conn)
     token_opts = with_optional([], :public_keys, conn)
 
@@ -94,10 +102,23 @@ defmodule Ueberauth.Strategy.Apple do
   end
 
   def handle_callback!(%Plug.Conn{params: %{"error" => error}} = conn) do
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.inspect(error)
+
     set_errors!(conn, [error("auth_failed", error)])
   end
 
   def handle_callback!(conn) do
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+    IO.puts("handle_callback error!")
+
     set_errors!(conn, [error("missing_code", "No code received")])
   end
 
